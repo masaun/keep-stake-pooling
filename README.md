@@ -13,7 +13,9 @@
 
 ***
 
-## 【Workflow】
+## 【Remarks】
+- "@openzeppelin/upgrades": "^2.7.2"
+- "openzeppelin-solidity": "2.4.0"
 
 &nbsp;
 
