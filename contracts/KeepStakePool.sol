@@ -10,7 +10,7 @@ import { KeepToken } from "./keep-core/KeepToken.sol";
  * @notice - This is a smart contract to allow smaller Keep owners to delegate a stake lower than the current minimum Keep stake
  * @notice - Minimum Keep stake amount is 70,000 KEEP.
  **/
-contract KeepStakePooling {
+contract KeepStakePool {
 
     KeepToken public keepToken;
 
