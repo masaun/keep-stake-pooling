@@ -19,6 +19,8 @@ contract KeepStakePoolFactory {
 
     KeepToken public keepToken;
 
+    mapping (uint => address) keepStakePools;
+
     constructor (KeepToken _keepToken) public {
         keepToken = _keepToken;
 
@@ -29,7 +31,7 @@ contract KeepStakePoolFactory {
     /***
      * @notice - Create a new KeepStakePool
      **/
-    function createKeepStakePool(KeepToken _keepToken) public returns (address _keepStakePool) {
+    function createKeepStakePool(KeepToken _keepToken) public returns (uint newKeepStakePoolId, address newKeepStakePool) {
         /// Create a new KeepStakePool
         KeepStakePool keepStakePool = new KeepStakePool(_keepToken);
 
@@ -37,9 +39,10 @@ contract KeepStakePoolFactory {
         uint newKeepStakePoolId = getNextKeepStakePoolId();
         currentKeepStakePoolId++;
 
-        /// [Todo]: Save a pair that are keepStakePoolId and KeepStakePool
+        /// Save a pair that are keepStakePoolId and KeepStakePool
+        keepStakePools[newKeepStakePoolId] = address(keepStakePool);
 
-        return address(keepStakePool);
+        return (newKeepStakePoolId, address(keepStakePool));
     }
 
 
