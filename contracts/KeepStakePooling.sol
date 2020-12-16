@@ -23,6 +23,22 @@ contract KeepStakePooling {
         KEEP_TOKEN = address(_keepToken);
     }
 
-    function something() public returns (bool) {}
+    /***
+     * @notice - Small KeepTokens owners delegate a stake into pool
+     **/
+    function stakeKeepTokenIntoPool(uint keepTokenStakeAmount) public returns (bool) {
+        keepToken.transferFrom(msg.sender, address(this), keepTokenStakeAmount);
+    }
+
+
+    /***
+     * @notice - Pooled KeepTokens are delegate staked into keep-core.
+     **/
+    function stakePooledKeepTokenAmountIntoCore() public returns (bool) {
+        uint pooledKeepTokenBalance = keepToken.balanceOf(address(this));
+
+        /// [Todo]: Stake pooled keepToken amount into keep-core contract
+    }
+
 
 }
