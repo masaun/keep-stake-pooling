@@ -1,8 +1,13 @@
-# keep-pooling-stake
+# Keep Stake Pooling
 
 ***
-## 【Introduction of keep-pooling-stake】
-- This is a smart contract for ...
+## 【Introduction of Keep Stake Pooling】
+- This is a smart contract for the Keep Stake Pooling.
+ 
+- Keep Stake Pooling is that:
+  - set up a system to allow smaller Keep owners to delegate a stake lower than the current minimum Keep stake. 
+  - It can be combined with others to reach the current minimum stake and run a node. 
+  - Previous work similar to this is referenced below. Contributions building on said work will also be accepted specifically reducing the min stake amount below 20k into the pool or making it non custodial.
 
 &nbsp;
 
