@@ -7,7 +7,7 @@
 - Keep Stake Pooling is that:
   - set up a system to allow smaller Keep owners to delegate a stake lower than the current minimum Keep stake. 
   - It can be combined with others to reach the current minimum stake and run a node. 
-  - Previous work similar to this is referenced below. Contributions building on said work will also be accepted specifically reducing the min stake amount below 20k into the pool or making it non custodial.
+  - Contributions building on said work will also be accepted specifically reducing the min stake amount below 20k into the pool or making it non custodial.
 
 &nbsp;
 
@@ -48,11 +48,11 @@ $ npm run script:ropsten
 - Keep Network (Stack and Rewards, KeepToken, etc...)
   - keep-core contract: https://github.com/keep-network/keep-core/tree/master/solidity/contracts
   - Keep Token dashboard (on Ropsten): https://dashboard.test.keep.network/tokens/delegate#granted
+  - GR8 Prize: https://gitcoin.co/issue/keep-network/tbtc.js/115/100024326
 
 <br>
 
 
 - Keep Network (tBTC)
-  - Prize: https://gitcoin.co/issue/keep-network/tbtc.js/115/100024326
   - Solidity API: https://docs.keep.network/tbtc/solidity/
   - Ropsten testnet / internal testnet: https://github.com/keep-network/tbtc-dapp#internal-testnet
