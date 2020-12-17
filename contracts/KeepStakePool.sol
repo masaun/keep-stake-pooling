@@ -8,6 +8,7 @@ import { IERC20 } from "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import { KeepToken } from "./keep-core/KeepToken.sol";
+import { Rewards } from "./keep-core/Rewards.sol";
 
 /// Stake-related contracts from keep-core
 /// @notice A base contract to allow stake delegation for staking contracts.
@@ -37,6 +38,7 @@ import { GrantStakingPolicy } from "./keep-core/GrantStakingPolicy.sol";
 contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
     KeepToken public keepToken;
+    Rewards public rewards;
 
     address KEEP_TOKEN; 
     uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
@@ -46,8 +48,9 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
     address[] smallStakers;
     
 
-    constructor (KeepToken _keepToken) public {
+    constructor (KeepToken _keepToken, Rewards _rewards) public {
         keepToken = _keepToken;
+        rewards = _rewards
 
         KEEP_TOKEN = address(_keepToken);
     }
