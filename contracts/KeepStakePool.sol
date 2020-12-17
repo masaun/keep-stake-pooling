@@ -73,19 +73,22 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
 
     /***
-     * @notice - Pooled KeepTokens are delegate staked into keep-core.
-     * @param _managedGrant - One of ManagedGrant contract that is created by ManagedGrantFactory contract
-     * @param _stakingContract - Address of the staking contract.
-     * @param _extraData - Data for stake delegation. This byte array must have the following values concatenated.
+     * @notice - Pooled KeepTokens are delegate staked into keep-core. Delegates tokens to a new operator using beneficiary and authorizer passed in _extraData parameter.
+     * @notice - receiveApproval() includes delegate() 
+     * @param _from - The owner of the tokens who approved them to transfer.
+     * @param _value - Approved amount for the transfer and stake.
+     * @param _operator - The new operator address.
+     * @param _extraData - Data for stake delegation as passed to receiveApproval.
      **/
     function stakePooledKeepTokenAmountIntoCore(
-        ManagedGrant _managedGrant,
-        address _stakingContract,
+        address _from,
+        uint256 _value,
+        address _operator,
         bytes memory _extraData
     ) public returns (bool) {
         /// Create a ManagedGrant contract instance.
         /// [Note]: ManagedGrant contract is created by ManagedGrantFactory contract
-        ManagedGrant managedGrant = _managedGrant;
+        //ManagedGrant managedGrant = _managedGrant;
 
         /// Get KeepTokens balance of this contract
         uint pooledKeepTokenBalance = getPooledKeepTokenBalance();
@@ -94,14 +97,16 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
         MINIMUM_STAKE_KEEP_AMOUNT = minimumStake();
         require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
 
-        /// [Todo]: Stake pooled keepToken amount into keep-core contract
-        managedGrant.stake(_stakingContract, pooledKeepTokenBalance, _extraData);
+        /// Delegate stake pooled keepToken amount into keep-core contract
+        /// [Note]: receiveApproval method includes delegate method in TokenStaking.sol
+        tokenStaking.receiveApproval(_from, _value, _operator, _extraData);
+        //managedGrant.stake(_stakingContract, pooledKeepTokenBalance, _extraData);
 
         /// Get grantId
-        uint grantId = managedGrant.grantId();
+        //uint grantId = managedGrant.grantId();
 
         /// Associate grantId with this contract (KeepStakePool) address 
-        stakedPools[grantId] = address(this);
+        //stakedPools[grantId] = address(this);
     }
 
 
