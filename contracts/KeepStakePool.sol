@@ -5,10 +5,17 @@ import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import { KeepToken } from "./keep-core/KeepToken.sol";
 
-/// Stake-related contracts
+/// Stake-related contracts from keep-core
+/// @notice A base contract to allow stake delegation for staking contracts.
 import { StakeDelegatable } from "./keep-core/StakeDelegatable.sol";
+
+/// @notice A token staking contract for a specified standard ERC20Burnable token.
 import { TokenStaking } from "./keep-core/TokenStaking.sol";
+
+/// @notice Escrow lets the staking contract to deposit undelegated, granted
 import { TokenStakingEscrow } from "./keep-core/TokenStakingEscrow.sol";
+
+/// @notice A token grant contract for a specified standard ERC20Burnable token.
 import { TokenGrant } from "./keep-core/TokenGrant.sol";
 import { TokenGrantStake } from "./keep-core/TokenGrantStake.sol";
 
