@@ -97,13 +97,13 @@ contract KeepStakePool {
     ///-------------------------
     /// Getter methods
     ///-------------------------
+
+    /***
+     * @notice - Get current pooled keepToken balance
+     **/    
     function getPooledKeepTokenBalance() public view returns (uint pooledKeepTokenBalance) {
         return keepToken.balanceOf(address(this));
     }
-    
-
-    
-
 
 
 }
