@@ -37,6 +37,9 @@ contract KeepStakePool {
     address KEEP_TOKEN; 
     uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
 
+    mapping (uint => address) stakedPools;  /// [Key]: grantId -> this (KeepStakePool) contract
+
+
     constructor (KeepToken _keepToken) public {
         keepToken = _keepToken;
 
@@ -54,6 +57,8 @@ contract KeepStakePool {
     /***
      * @notice - Pooled KeepTokens are delegate staked into keep-core.
      * @param _managedGrant - One of ManagedGrant contract that is created by ManagedGrantFactory contract
+     * @param _stakingContract - Address of the staking contract.
+     * @param _extraData - Data for stake delegation. This byte array must have the following values concatenated.
      **/
     function stakePooledKeepTokenAmountIntoCore(
         ManagedGrant _managedGrant,
@@ -72,6 +77,12 @@ contract KeepStakePool {
 
         /// [Todo]: Stake pooled keepToken amount into keep-core contract
         managedGrant.stake(_stakingContract, pooledKeepTokenBalance, _extraData);
+
+        /// Get grantId
+        uint grantId = managedGrant.grantId();
+
+        /// Associate grantId with this contract (KeepStakePool) address 
+        stakedPools[grantId] = address(this);
     }
 
 
