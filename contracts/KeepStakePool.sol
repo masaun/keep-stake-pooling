@@ -58,7 +58,6 @@ contract KeepStakePool {
     function stakePooledKeepTokenAmountIntoCore(
         ManagedGrant _managedGrant,
         address _stakingContract,
-        uint256 _amount,
         bytes memory _extraData
     ) public returns (bool) {
         /// Create a ManagedGrant contract instance.
@@ -72,7 +71,7 @@ contract KeepStakePool {
         require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
 
         /// [Todo]: Stake pooled keepToken amount into keep-core contract
-        managedGrant.stake(_stakingContract, _amount, _extraData);
+        managedGrant.stake(_stakingContract, pooledKeepTokenBalance, _extraData);
     }
 
 
