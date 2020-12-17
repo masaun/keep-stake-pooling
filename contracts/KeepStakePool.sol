@@ -1,5 +1,6 @@
 pragma solidity ^0.5.17;
 
+/// [Note]: Openzeppelin v2.4.0
 import { IERC20 } from "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
@@ -37,8 +38,10 @@ contract KeepStakePool {
     address KEEP_TOKEN; 
     uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
 
-    mapping (uint => address) stakedPools;  /// [Key]: grantId -> this (KeepStakePool) contract
-
+    mapping (uint => address) stakedPools;   /// [Key]: grantId -> this (KeepStakePool) contract
+    mapping (address => uint) keepTokenStakeAmounts;  /// [Key]: msg.sender -> KeepTokenStakeAmount
+    address[] smallStakers;
+    
 
     constructor (KeepToken _keepToken) public {
         keepToken = _keepToken;
@@ -50,7 +53,12 @@ contract KeepStakePool {
      * @notice - Small KeepTokens owners delegate a stake into pool
      **/
     function stakeKeepTokenIntoPool(uint keepTokenStakeAmount) public returns (bool) {
+        /// Stake from a user (msg.sender)
         keepToken.transferFrom(msg.sender, address(this), keepTokenStakeAmount);
+        keepTokenStakeAmounts[msg.sender] = keepTokenStakeAmount;
+
+        /// Register as a staked user (who are called "small stakers")
+        smallStakers.push(msg.sender);
     }
 
 
@@ -70,7 +78,7 @@ contract KeepStakePool {
         ManagedGrant managedGrant = _managedGrant;
 
         /// Get KeepTokens balance of this contract
-        uint pooledKeepTokenBalance = keepToken.balanceOf(address(this));
+        uint pooledKeepTokenBalance = getPooledKeepTokenBalance();
 
         /// Check whether pooled KeepTokens balance is greater than minimum stake keep amount (70,000 KEEP)
         require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
@@ -89,6 +97,10 @@ contract KeepStakePool {
     ///-------------------------
     /// Getter methods
     ///-------------------------
+    function getPooledKeepTokenBalance() public view returns (uint pooledKeepTokenBalance) {
+        return keepToken.balanceOf(address(this));
+    }
+    
 
     
 
