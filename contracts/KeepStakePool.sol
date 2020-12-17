@@ -1,5 +1,8 @@
 pragma solidity ^0.5.17;
 
+import { KeepStakePoolStorages } from "./keep-stake-pool/commons/KeepStakePoolStorages.sol";
+import { KeepStakePoolEvents } from "./keep-stake-pool/commons/KeepStakePoolEvents.sol";
+
 /// [Note]: Openzeppelin v2.4.0
 import { IERC20 } from "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
@@ -31,7 +34,7 @@ import { GrantStakingPolicy } from "./keep-core/GrantStakingPolicy.sol";
  * @notice - This is a smart contract to allow smaller Keep owners to delegate a stake lower than the current minimum Keep stake
  * @notice - Minimum Keep stake amount is 70,000 KEEP.
  **/
-contract KeepStakePool {
+contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
     KeepToken public keepToken;
 

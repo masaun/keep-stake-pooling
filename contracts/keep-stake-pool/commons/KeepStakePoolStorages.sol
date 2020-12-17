@@ -1,3 +1,5 @@
 pragma solidity ^0.5.17;
 
-contract KeepStakePoolStorages {}
+import { KeepStakePoolObjects } from "./KeepStakePoolObjects.sol";
+
+contract KeepStakePoolStorages is KeepStakePoolObjects {}
