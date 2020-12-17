@@ -19,6 +19,12 @@ import { TokenStakingEscrow } from "./keep-core/TokenStakingEscrow.sol";
 import { TokenGrant } from "./keep-core/TokenGrant.sol";
 import { TokenGrantStake } from "./keep-core/TokenGrantStake.sol";
 
+/// @notice A managed grant acts as the grantee towards the token grant contract,
+import { ManagedGrant } from "./keep-core/ManagedGrant.sol";
+
+/// @notice A staking policy defines the function `getStakeableAmount`
+import { GrantStakingPolicy } from "./keep-core/GrantStakingPolicy.sol";
+
 
 /***
  * @notice - This is a smart contract to allow smaller Keep owners to delegate a stake lower than the current minimum Keep stake
@@ -48,10 +54,21 @@ contract KeepStakePool {
     /***
      * @notice - Pooled KeepTokens are delegate staked into keep-core.
      **/
-    function stakePooledKeepTokenAmountIntoCore() public returns (bool) {
+    function stakePooledKeepTokenAmountIntoCore(
+        ManagedGrant _managedGrant,
+        address _stakingContract,
+        uint256 _amount,
+        bytes memory _extraData
+    ) public returns (bool) {
+        /// Create a ManagedGrant contract instance.
+        /// [Note]: ManagedGrant contract is created by ManagedGrantFactory contract
+        ManagedGrant managedGrant = _managedGrant;
+
+        /// Get KeepTokens balance of this contract
         uint pooledKeepTokenBalance = keepToken.balanceOf(address(this));
 
         /// [Todo]: Stake pooled keepToken amount into keep-core contract
+        managedGrant.stake(_stakingContract, _amount, _extraData);
     }
 
 
