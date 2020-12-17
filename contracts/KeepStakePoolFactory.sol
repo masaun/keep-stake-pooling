@@ -19,7 +19,7 @@ contract KeepStakePoolFactory {
 
     KeepToken public keepToken;
 
-    mapping (uint => address) keepStakePools;
+    mapping (uint => address) keepStakePools;  /// [Key]: KeepStakePool ID -> KeepStakePool contract address
 
     constructor (KeepToken _keepToken) public {
         keepToken = _keepToken;
