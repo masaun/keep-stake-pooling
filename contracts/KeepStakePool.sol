@@ -8,6 +8,7 @@ import { IERC20 } from "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import { KeepToken } from "./keep-core/KeepToken.sol";
+import { TokenStaking } from "./keep-core/TokenStaking.sol";
 import { Rewards } from "./keep-core/Rewards.sol";
 
 /// Stake-related contracts from keep-core
@@ -38,19 +39,22 @@ import { GrantStakingPolicy } from "./keep-core/GrantStakingPolicy.sol";
 contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
     KeepToken public keepToken;
+    TokenStaking public tokenStaking;
     Rewards public rewards;
 
-    address KEEP_TOKEN; 
-    uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
+    address KEEP_TOKEN;
+    uint MINIMUM_STAKE_KEEP_AMOUNT;
+    //uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
 
     mapping (uint => address) stakedPools;   /// [Key]: grantId -> this (KeepStakePool) contract
     mapping (address => uint) keepTokenStakeAmounts;  /// [Key]: msg.sender -> KeepTokenStakeAmount
     address[] smallStakers;
     
 
-    constructor (KeepToken _keepToken, Rewards _rewards) public {
+    constructor (KeepToken _keepToken, TokenStaking _tokenStaking, Rewards _rewards) public {
         keepToken = _keepToken;
-        rewards = _rewards
+        tokenStaking = _tokenStaking;
+        rewards = _rewards;
 
         KEEP_TOKEN = address(_keepToken);
     }
@@ -87,6 +91,7 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
         uint pooledKeepTokenBalance = getPooledKeepTokenBalance();
 
         /// Check whether pooled KeepTokens balance is greater than minimum stake keep amount (70,000 KEEP)
+        MINIMUM_STAKE_KEEP_AMOUNT = minimumStake();
         require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
 
         /// [Todo]: Stake pooled keepToken amount into keep-core contract
@@ -103,6 +108,13 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
     ///-------------------------
     /// Getter methods
     ///-------------------------
+
+    /***
+     * @notice - Get minimum KeepTokens stake amount
+     **/
+    function minimumStake() public view returns (uint minimumKeepTokenStakeAmount) {
+        return tokenStaking.minimumStake();
+    }
 
     /***
      * @notice - Get current pooled keepToken balance
