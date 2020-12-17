@@ -5,6 +5,13 @@ import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import { KeepToken } from "./keep-core/KeepToken.sol";
 
+/// Stake-related contracts
+import { StakeDelegatable } from "./keep-core/StakeDelegatable.sol";
+import { TokenStaking } from "./keep-core/TokenStaking.sol";
+import { TokenStakingEscrow } from "./keep-core/TokenStakingEscrow.sol";
+import { TokenGrant } from "./keep-core/TokenGrant.sol";
+import { TokenGrantStake } from "./keep-core/TokenGrantStake.sol";
+
 
 /***
  * @notice - This is a smart contract to allow smaller Keep owners to delegate a stake lower than the current minimum Keep stake

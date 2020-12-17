@@ -54,6 +54,7 @@ $ npm run script:ropsten
   - keep-core contract: https://github.com/keep-network/keep-core/tree/master/solidity/contracts
   - Keep Token dashboard (on Ropsten): https://dashboard.test.keep.network/tokens/delegate#granted
     (Process Guide: https://medium.com/@ben_longstaff/a-beginners-quick-start-guide-to-staking-on-the-keep-network-testnet-using-digitalocean-5a74ca60adc3 )
+  - Doc for staking: https://staking.keep.network/about-staking/staking-101
   - GR8 Prize: https://gitcoin.co/issue/keep-network/tbtc.js/115/100024326
 
 <br>
