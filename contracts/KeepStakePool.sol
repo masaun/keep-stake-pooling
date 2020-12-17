@@ -53,6 +53,7 @@ contract KeepStakePool {
 
     /***
      * @notice - Pooled KeepTokens are delegate staked into keep-core.
+     * @param _managedGrant - One of ManagedGrant contract that is created by ManagedGrantFactory contract
      **/
     function stakePooledKeepTokenAmountIntoCore(
         ManagedGrant _managedGrant,
@@ -67,9 +68,20 @@ contract KeepStakePool {
         /// Get KeepTokens balance of this contract
         uint pooledKeepTokenBalance = keepToken.balanceOf(address(this));
 
+        /// Check whether pooled KeepTokens balance is greater than minimum stake keep amount (70,000 KEEP)
+        require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
+
         /// [Todo]: Stake pooled keepToken amount into keep-core contract
         managedGrant.stake(_stakingContract, _amount, _extraData);
     }
+
+
+    ///-------------------------
+    /// Getter methods
+    ///-------------------------
+
+    
+
 
 
 }
