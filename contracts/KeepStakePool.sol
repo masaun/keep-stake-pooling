@@ -110,6 +110,15 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
     }
 
 
+    /***
+     * @notice - Distribute KeepToken as rewards into small stakers
+     **/
+    function distributeRewardsIntoSmallStakers() public returns (bool) {
+        /// [Todo]: Write a logic for distributing rewards
+    }
+
+
+
     ///-------------------------
     /// Getter methods
     ///-------------------------
