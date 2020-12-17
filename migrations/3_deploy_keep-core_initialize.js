@@ -1,3 +1,9 @@
+/***
+ * @notice - This migration files from the keep-core repo
+ *         - https://github.com/keep-network/keep-core/blob/master/solidity/migrations/3_initialize.js
+ * @dev - Can migrate on local (port: 8545)
+ **/
+
 const KeepRandomBeaconService = artifacts.require("./KeepRandomBeaconService.sol");
 const KeepRandomBeaconServiceImplV1 = artifacts.require("./KeepRandomBeaconServiceImplV1.sol");
 const KeepRandomBeaconOperator = artifacts.require("./KeepRandomBeaconOperator.sol");

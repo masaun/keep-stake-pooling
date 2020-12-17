@@ -1,3 +1,9 @@
+/***
+ * @notice - This migration files from the keep-core repo
+ *         - https://github.com/keep-network/keep-core/blob/master/solidity/migrations/2_deploy_contracts.js
+ * @dev - Can migrate on local (port: 8545)
+ **/
+
 const KeepToken = artifacts.require("./KeepToken.sol");
 const ModUtils = artifacts.require("./utils/ModUtils.sol");
 const AltBn128 = artifacts.require("./cryptography/AltBn128.sol");
