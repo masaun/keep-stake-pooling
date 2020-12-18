@@ -25,10 +25,12 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
     KeepToken public keepToken;
     TokenStaking public tokenStaking;
     BeaconRewards public beaconRewards;
+    //ManagedGrant public managedGrant;
 
     address KEEP_TOKEN;
     address TOKEN_STAKING;
     address BEACON_REWARDS;
+    //address MANAGE_GRANT;
 
     uint MINIMUM_STAKE_KEEP_AMOUNT;
     //uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
@@ -42,10 +44,12 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
         keepToken = _keepToken;
         tokenStaking = _tokenStaking;
         beaconRewards = _beaconRewards;
+        //managedGrant = _managedGrant;
 
         KEEP_TOKEN = address(_keepToken);
         TOKEN_STAKING = address(_tokenStaking);
         BEACON_REWARDS = address(_beaconRewards);
+        //MANAGE_GRANT = address(_managedGrant);
     }
 
     /***
