@@ -7,6 +7,7 @@
   },
   "scripts": {
     "ganache": "ganache-cli",
+    "test:keep-core": "truffle test ./test/keep-core --network local",
     "test:local": "truffle test ./test/test-local/* --network local",
     "compile:local": "truffle compile --reset --network local",
     "migrate:local": "truffle migrate --reset --network local",
