@@ -54,6 +54,7 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
     /***
      * @notice - Small KeepTokens owners delegate a stake into pool
+     * @param keepTokenStakeAmount - Stake amount of KeepTokens by a small staker
      **/
     function stakeKeepTokenIntoPool(uint keepTokenStakeAmount) public returns (bool) {
         /// Stake from a user (msg.sender)
