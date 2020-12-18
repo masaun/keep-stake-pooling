@@ -5,7 +5,7 @@ import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import { KeepToken } from "./keep-core/KeepToken.sol";
 import { TokenStaking } from "./keep-core/TokenStaking.sol";
-import { Rewards } from "./keep-core/Rewards.sol";
+import { BeaconRewards } from "./keep-core/BeaconRewards.sol";
 
 import { KeepStakePool } from "./KeepStakePool.sol";
 
@@ -22,14 +22,14 @@ contract KeepStakePoolFactory {
 
     KeepToken public keepToken;
     TokenStaking public tokenStaking;
-    Rewards public rewards;
+    BeaconRewards public beaconRewards;
 
     mapping (uint => address) keepStakePools;  /// [Key]: KeepStakePool ID -> KeepStakePool contract address
 
-    constructor (KeepToken _keepToken, TokenStaking _tokenStaking, Rewards _rewards) public {
+    constructor (KeepToken _keepToken, TokenStaking _tokenStaking, BeaconRewards _beaconRewards) public {
         keepToken = _keepToken;
         tokenStaking = _tokenStaking;
-        rewards = _rewards;
+        beaconRewards = _beaconRewards;
 
         KEEP_TOKEN = address(_keepToken);
     }
@@ -40,7 +40,7 @@ contract KeepStakePoolFactory {
      **/
     function createKeepStakePool() public returns (uint newKeepStakePoolId, address newKeepStakePool) {
         /// Create a new KeepStakePool
-        KeepStakePool keepStakePool = new KeepStakePool(keepToken, tokenStaking, rewards);
+        KeepStakePool keepStakePool = new KeepStakePool(keepToken, tokenStaking, beaconRewards);
 
         /// Give a keepStakePoolId to each keepStakePool
         uint newKeepStakePoolId = getNextKeepStakePoolId();

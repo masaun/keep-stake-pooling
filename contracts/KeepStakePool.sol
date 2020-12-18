@@ -9,7 +9,7 @@ import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 import { KeepToken } from "./keep-core/KeepToken.sol";
 import { TokenStaking } from "./keep-core/TokenStaking.sol";
-import { Rewards } from "./keep-core/Rewards.sol";
+import { BeaconRewards } from "./keep-core/BeaconRewards.sol";
 
 /// Stake-related contracts from keep-core
 /// @notice A base contract to allow stake delegation for staking contracts.
@@ -40,10 +40,11 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
     KeepToken public keepToken;
     TokenStaking public tokenStaking;
-    Rewards public rewards;
+    BeaconRewards public beaconRewards;
 
     address KEEP_TOKEN;
     address TOKEN_STAKING;
+    address BEACON_REWARDS;
 
     uint MINIMUM_STAKE_KEEP_AMOUNT;
     //uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
@@ -53,13 +54,14 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
     address[] smallStakers;
     
 
-    constructor (KeepToken _keepToken, TokenStaking _tokenStaking, Rewards _rewards) public {
+    constructor (KeepToken _keepToken, TokenStaking _tokenStaking, BeaconRewards _beaconRewards) public {
         keepToken = _keepToken;
         tokenStaking = _tokenStaking;
-        rewards = _rewards;
+        beaconRewards = _beaconRewards;
 
         KEEP_TOKEN = address(_keepToken);
         TOKEN_STAKING = address(_tokenStaking);
+        BEACON_REWARDS = address(_beaconRewards);
     }
 
     /***
@@ -101,7 +103,7 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
         require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
 
         /// Delegate stake pooled keepToken amount into keep-core contract
-        /// [Note]: Approve
+        /// [Note]: Approve a spender (TokenStaking contract) for using KeepToken
         keepToken.approveAndCall(TOKEN_STAKING, pooledKeepTokenBalance, _extraData);
 
         /// [Note]: receiveApproval method includes delegate method in TokenStaking.sol
@@ -121,7 +123,6 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
      **/
     function distributeRewardsIntoSmallStakers() public returns (bool) {
         /// [Todo]: Write a logic for distributing rewards
-
     }
 
 
