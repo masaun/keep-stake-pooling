@@ -43,6 +43,8 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
     Rewards public rewards;
 
     address KEEP_TOKEN;
+    address TOKEN_STAKING;
+
     uint MINIMUM_STAKE_KEEP_AMOUNT;
     //uint MINIMUM_STAKE_KEEP_AMOUNT = 70000;  /// [Note]: Minimum Keep stake amount is 70,000 KEEP
 
@@ -57,6 +59,7 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
         rewards = _rewards;
 
         KEEP_TOKEN = address(_keepToken);
+        TOKEN_STAKING = address(_tokenStaking);
     }
 
     /***
@@ -98,6 +101,9 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
         require (pooledKeepTokenBalance > MINIMUM_STAKE_KEEP_AMOUNT, "pooled KeepTokens balance must be greater than minimum stake keep amount (70,000 KEEP)");
 
         /// Delegate stake pooled keepToken amount into keep-core contract
+        /// [Note]: Approve
+        keepToken.approveAndCall(TOKEN_STAKING, pooledKeepTokenBalance, _extraData);
+
         /// [Note]: receiveApproval method includes delegate method in TokenStaking.sol
         tokenStaking.receiveApproval(_from, _value, _operator, _extraData);
         //managedGrant.stake(_stakingContract, pooledKeepTokenBalance, _extraData);
@@ -115,7 +121,7 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
      **/
     function distributeRewardsIntoSmallStakers() public returns (bool) {
         /// [Todo]: Write a logic for distributing rewards
-        
+
     }
 
 
