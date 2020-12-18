@@ -115,6 +115,7 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
      **/
     function distributeRewardsIntoSmallStakers() public returns (bool) {
         /// [Todo]: Write a logic for distributing rewards
+        
     }
 
 

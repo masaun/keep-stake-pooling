@@ -39,9 +39,19 @@ $ npm run migrate:ropsten
 
 <br>
 
-### ③ Execute script (it's instead of testing)
+### ③ Execute script
 ```
 $ npm run script:ropsten
+```
+
+<br>
+
+### ③ Execute test
+- Test on the local
+```
+$ npm run test:local
+
+(ganache-cli && truffle test ./test/test-local/* --network local)
 ```
 
 
