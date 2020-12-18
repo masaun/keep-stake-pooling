@@ -120,9 +120,11 @@ contract KeepStakePool is KeepStakePoolStorages, KeepStakePoolEvents {
 
     /***
      * @notice - Distribute KeepToken as rewards into small stakers
+     * @param groupIndex - Staked pool's index
      **/
-    function distributeRewardsIntoSmallStakers() public returns (bool) {
-        /// [Todo]: Write a logic for distributing rewards
+    function distributeRewardsIntoSmallStakers(uint groupIndex) public returns (bool) {
+        /// Distributing rewards
+        beaconRewards.receiveReward(groupIndex);
     }
 
 
