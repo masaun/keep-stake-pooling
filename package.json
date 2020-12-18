@@ -6,7 +6,8 @@
     "test": "test"
   },
   "scripts": {
-    "test:local": "ganache-cli && truffle test ./test/test-local/* --network local",
+    "ganache": "ganache-cli",
+    "test:local": "truffle test ./test/test-local/* --network local",
     "compile:local": "truffle compile --reset --network local",
     "migrate:local": "truffle migrate --reset --network local",
     "console:ropsten": "truffle console --network ropsten",
