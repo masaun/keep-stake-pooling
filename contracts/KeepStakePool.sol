@@ -7,29 +7,13 @@ import { KeepStakePoolEvents } from "./keep-stake-pool/commons/KeepStakePoolEven
 import { IERC20 } from "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 import { SafeMath } from "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
+/// [Note]: Stake-related contracts from keep-core
 import { KeepToken } from "./keep-core/KeepToken.sol";
 import { TokenStaking } from "./keep-core/TokenStaking.sol";
 import { BeaconRewards } from "./keep-core/BeaconRewards.sol";
 
-/// Stake-related contracts from keep-core
-/// @notice A base contract to allow stake delegation for staking contracts.
-import { StakeDelegatable } from "./keep-core/StakeDelegatable.sol";
-
-/// @notice A token staking contract for a specified standard ERC20Burnable token.
-import { TokenStaking } from "./keep-core/TokenStaking.sol";
-
-/// @notice Escrow lets the staking contract to deposit undelegated, granted
-import { TokenStakingEscrow } from "./keep-core/TokenStakingEscrow.sol";
-
-/// @notice A token grant contract for a specified standard ERC20Burnable token.
-import { TokenGrant } from "./keep-core/TokenGrant.sol";
-import { TokenGrantStake } from "./keep-core/TokenGrantStake.sol";
-
 /// @notice A managed grant acts as the grantee towards the token grant contract,
 import { ManagedGrant } from "./keep-core/ManagedGrant.sol";
-
-/// @notice A staking policy defines the function `getStakeableAmount`
-import { GrantStakingPolicy } from "./keep-core/GrantStakingPolicy.sol";
 
 
 /***
